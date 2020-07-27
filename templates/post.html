@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block head %}
+<title> Posts </title>
+
+{% endblock %}
+
+{% block body %}
+    <script type="javascript" src="../js/bootstrap.bundle.min.js"></script>
+    <script type="javascript" src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.js"></script>
+
+    <h1> All Posts</h1>
+    <hr>
+        <h2>Create New Blog Post:</h2>
+    <form action="/post" method="POST">
+        Title <input type = "text" name="title" id="title">
+        <br >
+        Post : <input type="text" name="content" id = "content">
+        <br >
+        Author : <input type="text" name="author" id = "author">
+        <br>
+        <input type="submit" value="Post">
+    </form>
+    <hr>
+    {% for post in data %}
+        <h1>{{post.title}}</h1>
+        
+        {% if post.author %}
+            <h3>{{post.author}}</h3>
+        {% else %}
+            <h3> Anonymous</h3>
+        
+        {% endif %}
+        <p>{{post.content}}</p>
+        <a href="/post/delete/{{post.id}}">Delete</a>
+        <a href="/post/edit/{{post.id}}">Edit</a>
+        <hr>
+        {% endfor %}
+
+{% endblock %}
